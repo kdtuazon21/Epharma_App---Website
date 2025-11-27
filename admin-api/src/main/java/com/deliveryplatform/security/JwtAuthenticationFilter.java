@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 String role = claims.get("role", String.class);
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(email, null, Collections.singletonList(new SimpleGrantedAuthority(role)));
                 SecurityContextHolder.getContext().setAuthentication(auth);
-            } catch (Exception e) {
+            } catch (io.jsonwebtoken.JwtException | IllegalArgumentException e) {
                 // invalid token - ignore and let security handle unauthorized
             }
         }

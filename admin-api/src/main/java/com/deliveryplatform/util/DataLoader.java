@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Configuration
 public class DataLoader {
     @Bean
-    CommandLineRunner init(UserRepository userRepository,
+    CommandLineRunner dataLoader(UserRepository userRepository,
                            MerchantRepository merchantRepository,
                            DriverRepository driverRepository,
                            OrderRepository orderRepository,
