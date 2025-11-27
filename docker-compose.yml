@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: delivery_db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  admin-api:
+    build:
+      context: ./admin-api
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/delivery_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      APP_JWT_SECRET: please_change_in_prod
+    depends_on:
+      - db
+    ports:
+      - "8081:8081"
+  admin-web:
+    build:
+      context: ./admin-web
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - admin-api
+
+volumes:
+  db-data:
