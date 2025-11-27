@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "allowJs": true,
+    "checkJs": false,
+    "noEmit": true,
+    "jsx": "preserve"
+  },
+  "include": ["admin-web/src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

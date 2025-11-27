@@ -59,32 +59,34 @@ body{font-family:Inter, system-ui, Arial, sans-serif;margin:0}
 .content{flex:1;padding:20px;background:#F8FAFC}
 </style>
 
-<div class="app">
+<template>
+  <div class="app">
     <div class="topbar">
-    <div style="font-weight:700">Admin Web — Delivery Platform (PHP)</div>
-    <div style="display:flex;align-items:center;gap:12px">
-      <div class="nav">
-        <button :class="{active: tab === 'dashboard'}" @click="tab = 'dashboard'">Dashboard</button>
-        <button :class="{active: tab === 'merchants'}" @click="tab = 'merchants'">Merchants</button>
-        <button :class="{active: tab === 'drivers'}" @click="tab = 'drivers'">Drivers</button>
-        <button :class="{active: tab === 'orders'}" @click="tab = 'orders'">Orders</button>
-      </div>
-      <div style="margin-left:18px">
-        <template v-if="!token">
-          <input v-model="email" placeholder="email" style="padding:6px;border-radius:6px;border:1px solid #ddd;margin-right:6px" />
-          <input v-model="password" type="password" placeholder="password" style="padding:6px;border-radius:6px;border:1px solid #ddd;margin-right:6px" />
-          <button @click="login" style="background:#059669;color:white;padding:8px;border-radius:8px;border:none">Login</button>
-        </template>
-        <template v-else>
-          <button @click="logout" style="background:#DC2626;color:white;padding:8px;border-radius:8px;border:none">Logout</button>
-        </template>
+      <div style="font-weight:700">Admin Web — Delivery Platform (PHP)</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="nav">
+          <button :class="{active: tab === 'dashboard'}" @click="tab = 'dashboard'">Dashboard</button>
+          <button :class="{active: tab === 'merchants'}" @click="tab = 'merchants'">Merchants</button>
+          <button :class="{active: tab === 'drivers'}" @click="tab = 'drivers'">Drivers</button>
+          <button :class="{active: tab === 'orders'}" @click="tab = 'orders'">Orders</button>
+        </div>
+        <div style="margin-left:18px">
+          <template v-if="!token">
+            <input v-model="email" placeholder="email" style="padding:6px;border-radius:6px;border:1px solid #ddd;margin-right:6px" />
+            <input v-model="password" type="password" placeholder="password" style="padding:6px;border-radius:6px;border:1px solid #ddd;margin-right:6px" />
+            <button @click="login" style="background:#059669;color:white;padding:8px;border-radius:8px;border:none">Login</button>
+          </template>
+          <template v-else>
+            <button @click="logout" style="background:#DC2626;color:white;padding:8px;border-radius:8px;border:none">Logout</button>
+          </template>
+        </div>
       </div>
     </div>
+    <div class="content">
+      <Dashboard v-if="tab === 'dashboard'" />
+      <Merchants v-if="tab === 'merchants'" />
+      <Drivers v-if="tab === 'drivers'" />
+      <Orders v-if="tab === 'orders'" />
+    </div>
   </div>
-  <div class="content">
-    <Dashboard v-if="tab === 'dashboard'" />
-    <Merchants v-if="tab === 'merchants'" />
-    <Drivers v-if="tab === 'drivers'" />
-    <Orders v-if="tab === 'orders'" />
-  </div>
-</div>
+</template>
